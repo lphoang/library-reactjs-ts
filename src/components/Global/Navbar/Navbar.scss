@@ -1,0 +1,81 @@
+@import '/src/assets/styles/config';
+
+$font-size: 16px;
+$color: #ffffff;
+
+.nav__container {
+  position: fixed;
+  width: 100%;
+}
+
+.nav__menu {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  align-content: center;
+  margin: 0 3rem;
+}
+
+.nav__item {
+  border: none;
+  position: relative;
+  padding: 19px 22px;
+  transition: all .2s ease;
+  background: inherit;
+  margin: 1rem 2rem 0 0;
+  cursor: pointer;
+
+  &::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    display: block;
+    border-radius: 28px;
+    background: rgba($red-primary, .75);
+    width: 56px;
+    height: 56px;
+    transition: all .3s ease;
+  }
+
+  span {
+    position: relative;
+    font-size: $font-size;
+    line-height: 18px;
+    font-weight: 900;
+    letter-spacing: .25em;
+    text-transform: uppercase;
+    vertical-align: middle;
+    color: $color;
+  }
+
+  svg {
+    font-size: $font-size;
+    position: relative;
+    top: 0;
+    margin-left: 10px;
+    fill: none;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    stroke: $color;
+    stroke-width: 2;
+    transform: translateX(-5px);
+    transition: all .3s ease;
+  }
+
+  &:hover {
+    &::before {
+      width: 100%;
+      background: rgba($red-primary, 1);
+
+      svg {
+        transform: translateX(0);
+      }
+    }
+  }
+
+  &:active {
+    transform: scale(.96)
+  }
+}
+

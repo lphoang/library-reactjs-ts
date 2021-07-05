@@ -1,0 +1,143 @@
+@import '/src/assets/styles/config';
+
+.login-container {
+  width: 100%;
+  height: 100%;
+  display: flex;
+}
+
+.login-image {
+  width: 70%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.login-form {
+  margin: 15rem auto;
+  padding: 0 3.5rem;
+  width: 30%;
+  height: 50%;
+
+  h1 {
+    color: $green;
+    font-size: 2.5rem;
+    text-align: center;
+  }
+
+  hr {
+    opacity: 0.25;
+    margin: 0 6rem 0 6rem;
+  }
+
+  form {
+    display: flex;
+    margin: 2rem 1rem;
+    flex-direction: column;
+
+    hr {
+      margin: 0.5rem 0.5rem 0 0.5rem;
+      opacity: 0.25;
+    }
+
+    div {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 0.75rem;
+
+      input {
+        width: 70%;
+        border-radius: 5px;
+        border: none;
+        outline: none;
+        padding: 0.5rem;
+
+        &:focus {
+          transform: scale(1.01);
+        }
+      }
+      label {
+        width: 25%;
+        color: white;
+        font-weight: 900;
+      }
+    }
+
+    p {
+      text-align: center;
+      color: white;
+      margin-top: 1rem;
+      font-weight: 900;
+      .p-link {
+        text-decoration: none;
+        color: $brown;
+        font-weight: 600;
+        margin-left: 0.5rem;
+      }
+    }
+  }
+}
+
+.btn-link {
+  margin-top: 1.25rem;
+  button {
+    padding: 0.5rem;
+    border-radius: 25px;
+    border: none;
+    outline: none;
+    width: 100%;
+    cursor: pointer;
+    background: $red-secondary;
+    color: white;
+    transition: all 0.2s ease;
+
+    &:hover {
+      filter: brightness(1.05);
+      transform: scale(1.03);
+    }
+
+    &:active {
+      transform: scale(0.96);
+    }
+  }
+}
+
+@media screen and (max-width: 1366px) {
+  .login-form {
+    width: 40%;
+  }
+  .login-image {
+    width: 60%;
+  }
+}
+
+@media screen and (max-width: 992px) {
+  .login-form {
+    width: 50%;
+  }
+  .login-image {
+    width: 50%;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .login-image {
+    width: 40%;
+  }
+  .login-form {
+    width: 60%;
+    padding: 0 1rem;
+  }
+}
+
+@media screen and (max-width: 567px) {
+  .login-image {
+    position: relative;
+    width: 100%;
+    opacity: 0.2;
+  }
+  .login-form {
+    position: absolute;
+    width: 100%;
+    z-index: 999;
+  }
+}
