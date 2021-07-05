@@ -1,7 +1,7 @@
 import React, {useEffect} from 'react';
 import {Link} from "react-router-dom"
 
-import LoginImage from '../../assets/images/old-library-book.jpg'
+import LoginImage from 'assets/images/old-library-book.jpg'
 import "./Login.scss"
 
 function Login() {
