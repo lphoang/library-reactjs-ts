@@ -1,3 +1,4 @@
+import { IAppUser } from './../../utils/types/common';
 import { LoginRequest, RegisterRequest, IApiState } from 'utils/types';
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 import auth, {
@@ -6,14 +7,13 @@ import auth, {
     getSuccess,
     getLoading,
     getInitialApi,
+    getInitialUserInfo,
 } from 'apis/commonActions'
-
-import { push } from 'connected-react-router'
 
 const initialState = {
     isLogged: false,
     apiState: getInitialApi(),
-    redirectPath: ''
+    user: getInitialUserInfo(),
 }
 
 const authSlice = createSlice({
@@ -23,16 +23,14 @@ const authSlice = createSlice({
         setIsLogged: (state) => { state.isLogged = true },
         setIsNotLogged: (state) => { state.isLogged = false },
         authLoading: (state) => { state.apiState = getLoading() },
-        authDone: (state) => {
+        authDone: (state, action: PayloadAction<IAppUser>) => {
             state.apiState = getSuccess(state.apiState);
-            state.isLogged = true;
+            state.user = action.payload;
+            state.isLogged = state.user.enabled;
         },
         authError: (state, action: PayloadAction<string>) => {
             state.apiState = getError(state.apiState, action.payload);
             state.isLogged = false;
-        },
-        setRedirectPath: (state, action: PayloadAction<string>) => {
-            state.redirectPath = action.payload;
         }
     }
 })
@@ -40,35 +38,22 @@ const authSlice = createSlice({
 export const authLogin = ({ email, password }: LoginRequest) => (dispatch: any, getState: any) => {
     dispatch(actions.authLoading());
     return auth().login({ email, password })
-        .then(() => {
-            dispatch(actions.authDone())
-            const redirectPath = getState().auth.redirectPath;
-            (redirectPath && redirectPath !== '/login')
-                ? dispatch(push(getState().auth.redirectPath))
-                : dispatch(push('/'));
-            dispatch(actions.setRedirectPath(''));
+        .then((response: any) => {
+            dispatch(actions.authDone(response.data.appUser))
         })
-        .catch((error: { response: { data: { error: string } }; message: any }) =>
+        .catch((error : any) =>
             dispatch(actions.authError(getErrorMsg(error))))
 }
 
-export const authRegister = ({ firstName, lastName, email, password }: RegisterRequest) => (dispatch: any, getState: any) => {
+export const authRegister = ({ firstName, lastName, age, email, password }: RegisterRequest) => (dispatch: any, getState: any) => {
     dispatch(actions.authLoading);
-    return auth().register({ firstName, lastName, email, password })
-        .then(() => {
-            dispatch(actions.authDone())
-            const redirectPath = getState().auth.redirectPath;
-            (redirectPath && redirectPath !== '/register')
-                ? dispatch(push(getState().auth.redirectPath))
-                : dispatch(push('/'));
-            dispatch(actions.setRedirectPath(''));
+    return auth().register({ firstName, lastName, age, email, password })
+        .then((response: any) => {
+            dispatch(actions.authDone(response.data.appUser))
+            console.log(response);
         })
         .catch((error: { response: { data: { error: string } }; message: any }) =>
             dispatch(actions.authError(getErrorMsg(error))))
-}
-
-export const authCheck = (path: string) => (dispatch: any) => {
-    actions.setRedirectPath(path);
 }
 
 export const actions = authSlice.actions;
@@ -76,7 +61,5 @@ export const actions = authSlice.actions;
 export const selectApiState = (state: { auth: { apiState: IApiState; }; }) => state.auth.apiState;
 
 export const selectIsLogged = (state: { auth: { isLogged: boolean; }; }) => state.auth.isLogged;
-
-export const selectCurrentPath = (state: { router: { location: { pathname: string; }; }; }) => state.router.location.pathname;
 
 export default authSlice.reducer;

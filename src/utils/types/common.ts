@@ -11,21 +11,39 @@ export interface NavMenu {
     className: string,
 }
 
-export interface IApiState{
+export interface IApiState {
     isLoading: boolean,
     isSuccess: boolean,
     isError: boolean,
     errorMessage: string
 }
 
-export interface RegisterRequest{
+export interface RegisterRequest {
     firstName: string,
     lastName: string,
+    age: number,
     email: string,
     password: string,
 }
 
-export interface LoginRequest{
+export interface LoginRequest {
     email: string,
     password: string,
+}
+
+export interface IAppUser {
+    accountNonExpired: boolean,
+    accountNonLocked: boolean,
+    age: number,
+    appUserRole: string,
+    authorities: [{ authority: string }],
+    credentialsNonExpired: boolean,
+    email: string,
+    enabled: boolean,
+    firstName: string,
+    id: string,
+    lastName: string,
+    locked: boolean,
+    password: string,
+    username: string,
 }

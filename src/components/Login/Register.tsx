@@ -14,6 +14,7 @@ function SignUp() {
     const [user, setUser] = useState({
         firstName: '',
         lastName: '',
+        age: 0,
         email: '',
         password: '',
     })
@@ -26,6 +27,10 @@ function SignUp() {
     useEffect(() => {
         isLogged && history.push('/');
     },[isLogged])
+
+    useEffect(() => {
+        apiState.isSuccess && history.push('/verify-email');
+    },[apiState.isSuccess])
 
     const handleSubmit = (e: any) => {
         e.preventDefault();
@@ -62,6 +67,19 @@ function SignUp() {
                         onChange={
                             (e) => setUser({
                                 ...user, lastName : e.target.value
+                            })
+                        }/>
+                    </div>
+                    <hr />
+                    <div>
+                        <label>Age</label>
+                        <input 
+                        type="text" 
+                        placeholder="Enter your age" 
+                        value={user.age}
+                        onChange={
+                            (e) => setUser({
+                                ...user, age : +e.target.value
                             })
                         }/>
                     </div>

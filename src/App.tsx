@@ -9,16 +9,18 @@ import {
 import Home from "./components/Home";
 import Login from "./components/Login/Login"
 import Register from "./components/Login/Register";
-
+import VerifyEmail from "components/Login/VerifyEmail";
 
 function App() {
+    console.log(process.env.REACT_APP_BASE_URL);
     return (
-        <div className="App">
+        <div>
             <Router>
                 <Switch>
                     <Route exact path="/" component={Home}/>
                     <Route exact path="/login" component={Login}/>
                     <Route exact path="/register" component={Register}/>
+                    <Route exact path="/verify-email" component={VerifyEmail}/>
                 </Switch>
             </Router>
         </div>
