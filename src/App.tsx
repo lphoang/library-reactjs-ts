@@ -8,7 +8,7 @@ import {
 
 import Home from "./components/Home";
 import Login from "./components/Login/Login"
-import SignUp from "./components/Login/SignUp";
+import Register from "./components/Login/Register";
 
 
 function App() {
@@ -18,7 +18,7 @@ function App() {
                 <Switch>
                     <Route exact path="/" component={Home}/>
                     <Route exact path="/login" component={Login}/>
-                    <Route exact path="/sign-up" component={SignUp}/>
+                    <Route exact path="/register" component={Register}/>
                 </Switch>
             </Router>
         </div>

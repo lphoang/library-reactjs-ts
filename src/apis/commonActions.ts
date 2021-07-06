@@ -1,7 +1,7 @@
 import axios from 'axios';
+import { IApiState, LoginRequest, RegisterRequest } from 'utils/types';
 
-
-export function getLoading(){
+export function getLoading() : IApiState{
     return{
         isLoading: true,
         isSuccess: false,
@@ -10,7 +10,7 @@ export function getLoading(){
     };
 }
 
-export function getInit(){
+export function getInitialApi() : IApiState{
     return{
         isLoading: false,
         isSuccess: false,
@@ -19,18 +19,20 @@ export function getInit(){
     };
 }
 
-export function getSuccess(state: { isSuccess: boolean; isLoading: boolean; }){
-    state.isSuccess = true;
-    state.isLoading = false;
-    return {...state};
+export function getSuccess(apiState: IApiState) : IApiState{
+    apiState.isError = false;
+    apiState.errorMessage = '';
+    apiState.isSuccess = true;
+    apiState.isLoading = false;
+    return {...apiState};
 }
 
-export function getError(state: { isSuccess: boolean; isLoading: boolean; isError: boolean; errorMessage: string }, errorMessage: string){
-    state.isSuccess = false;
-    state.isLoading = false;
-    state.isError = true;
-    state.errorMessage = errorMessage;
-    return {...state}
+export function getError(apiState : IApiState, errorMessage: string) : IApiState{
+    apiState.isSuccess = false;
+    apiState.isLoading = false;
+    apiState.isError = true;
+    apiState.errorMessage = errorMessage;
+    return {...apiState}
 }
 
 export function getErrorMsg(error: { response: { data: { error: string; }; }; message: any; }){
@@ -44,10 +46,17 @@ export function getErrorMsg(error: { response: { data: { error: string; }; }; me
 }
 
 export const instance = axios.create({
-    baseURL: process.env.REACT_APP_BASEURL,
+    baseURL: 'http://localhost:8080',
     withCredentials: true,
     responseType: 'json',
     headers: {
         'Content-Type': 'application/json'
     }
 })
+
+export default function auth(){
+    return {
+        register : (request: RegisterRequest) : any => instance.post('/user/register', request),
+        login : (request: LoginRequest) : any => instance.post('/user/login', request),
+    }
+}

@@ -1,11 +1,14 @@
 import { configureStore, ThunkAction, Action} from '@reduxjs/toolkit';
 import createSagaMiddleware from 'redux-saga'
+import authReducer from 'features/slices/authSlice'
 
 const sagaMiddleware = createSagaMiddleware();
 export const store = configureStore({
-  reducer: {},
+  reducer: {
+    auth: authReducer,
+  },
   middleware: (getDefaultMiddleware) =>  getDefaultMiddleware().concat(sagaMiddleware),
-  devTools: true,
+  devTools: process.env.NODE_ENV !== 'production',
 });
 
 export type AppDispatch = typeof store.dispatch;

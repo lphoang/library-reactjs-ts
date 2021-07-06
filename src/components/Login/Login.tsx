@@ -1,41 +1,74 @@
-import React, {useEffect} from 'react';
-import {Link} from "react-router-dom"
+import React, {useEffect, useState} from 'react';
+import {Link, useHistory} from "react-router-dom"
 
 import LoginImage from 'assets/images/old-library-book.jpg'
 import "./Login.scss"
+import ApiState from 'components/Global/ApiState';
+import { useAppDispatch, useAppSelector } from 'app/hooks';
+import { authLogin, selectApiState, selectIsLogged } from 'features/slices/authSlice';
 
 function Login() {
+    const apiState = useAppSelector(selectApiState);
+    const isLogged = useAppSelector(selectIsLogged);
+    const dispatch = useAppDispatch();
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
+    const history = useHistory();
+
     useEffect(() => {
         document.title = `Login`
     });
+
+    useEffect(() => {
+        isLogged && history.push('/')
+    },[isLogged])
+
+    function handleSubmit(e : any){
+        e.preventDefault();
+        console.log("Trying to login", {email, password});
+        dispatch(authLogin({email, password}));
+    }
 
     return (
         <div className="login-container">
             <img src={LoginImage} className="login-image" alt=""/>
             <div className="login-form">
                 <h1>Welcome back</h1>
+                <ApiState {...apiState}/>
                 <hr/>
-                <form action="">
+                <form onSubmit={handleSubmit}>
                     <div>
-                        <label htmlFor="">Username</label>
-                        <input type="text" placeholder="Enter your username"/>
+                        <label>Email</label>
+                        <input 
+                        type="email" 
+                        placeholder="Enter your email"
+                        value={email}
+                        onChange={
+                            (e) => setEmail(e.target.value)
+                        }/>
                     </div>
                     <hr/>
                     <div>
-                        <label htmlFor="">Password</label>
-                        <input type="text" placeholder="Enter your password"/>
+                        <label>Password</label>
+                        <input 
+                        type="password" 
+                        placeholder="Enter your password"
+                        value={password}
+                        onChange={
+                            (e) => setPassword(e.target.value)
+                        }/>
                     </div>
                     <hr/>
                     <p>Don't have account yet?
-                        <Link to="/sign-up" className="p-link">
+                        <Link to="/register" className="p-link">
                             Join us
                         </Link>
                     </p>
-                    <Link to="/" className="btn-link">
+                    <div className="btn-link">
                         <button type="submit">
                             Login
                         </button>
-                    </Link>
+                    </div>
                 </form>
             </div>
         </div>

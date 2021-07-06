@@ -13,7 +13,7 @@
 }
 
 .login-form {
-  margin: 15rem auto;
+  margin: 12rem auto;
   padding: 0 3.5rem;
   width: 30%;
   height: 50%;
@@ -78,8 +78,8 @@
 }
 
 .btn-link {
-  margin-top: 1.25rem;
   button {
+    margin-top: 1.5rem;
     padding: 0.5rem;
     border-radius: 25px;
     border: none;
@@ -139,5 +139,6 @@
     position: absolute;
     width: 100%;
     z-index: 999;
+    padding: 0 3rem;
   }
 }
