@@ -35,25 +35,30 @@ const authSlice = createSlice({
     }
 })
 
-export const authLogin = ({ email, password }: LoginRequest) => (dispatch: any, getState: any) => {
+export const authLogin = ({ email, password }: LoginRequest) => (dispatch: any) => {
     dispatch(actions.authLoading());
     return auth().login({ email, password })
         .then((response: any) => {
-            dispatch(actions.authDone(response.data.appUser))
+            dispatch(actions.authDone(response.data.user))
+            console.log(response);
         })
-        .catch((error : any) =>
-            dispatch(actions.authError(getErrorMsg(error))))
+        .catch((error: any) => {
+            dispatch(actions.authError(getErrorMsg(error)))
+            console.log(error.data.response);
+        })
 }
 
-export const authRegister = ({ firstName, lastName, age, email, password }: RegisterRequest) => (dispatch: any, getState: any) => {
+export const authRegister = ({ firstName, lastName, age, email, password }: RegisterRequest) => (dispatch: any) => {
     dispatch(actions.authLoading);
     return auth().register({ firstName, lastName, age, email, password })
         .then((response: any) => {
             dispatch(actions.authDone(response.data.appUser))
             console.log(response);
         })
-        .catch((error: { response: { data: { error: string } }; message: any }) =>
-            dispatch(actions.authError(getErrorMsg(error))))
+        .catch((error: any) => {
+            dispatch(actions.authError(getErrorMsg(error)))
+            console.log(error);
+        })
 }
 
 export const actions = authSlice.actions;

@@ -1,5 +1,4 @@
 import React from "react";
-import "./App.scss"
 import {
     BrowserRouter as Router,
     Switch,
@@ -12,7 +11,6 @@ import Register from "./components/Login/Register";
 import VerifyEmail from "components/Login/VerifyEmail";
 
 function App() {
-    console.log(process.env.REACT_APP_BASE_URL);
     return (
         <div>
             <Router>

@@ -13,12 +13,8 @@ export function getLoading(): IApiState {
 
 export function getInitialUserInfo(): IAppUser {
     return {
-        accountNonExpired: true,
-        accountNonLocked: true,
         age: 0,
-        appUserRole: "USER",
-        authorities: [{ authority: "USER" }],
-        credentialsNonExpired: true,
+        role: "USER",
         email: "",
         enabled: false,
         firstName: "",
@@ -66,7 +62,7 @@ export function getErrorMsg(error : any) {
 }
 
 export const instance = axios.create({
-    baseURL: "https://library-springboot-postgresql.herokuapp.com",
+    baseURL: process.env.REACT_APP_BASE_URL,
     withCredentials: true,
     responseType: 'json',
     headers: {

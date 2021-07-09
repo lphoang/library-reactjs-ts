@@ -1,5 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Dosis:wght@200;300;400;500;600;700;800&display=swap');
-
+@import 'assets/styles/config';
+@import 'assets/styles/button';
 
 body {
   margin: 0;
@@ -8,7 +9,6 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  height: 100vh;
   background: #151414;
   min-width: 440px;
 }

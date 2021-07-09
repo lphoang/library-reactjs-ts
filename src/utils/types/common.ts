@@ -32,12 +32,8 @@ export interface LoginRequest {
 }
 
 export interface IAppUser {
-    accountNonExpired: boolean,
-    accountNonLocked: boolean,
     age: number,
-    appUserRole: string,
-    authorities: [{ authority: string }],
-    credentialsNonExpired: boolean,
+    role: string,
     email: string,
     enabled: boolean,
     firstName: string,

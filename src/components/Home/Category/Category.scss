@@ -1,0 +1,31 @@
+.categories__container {
+  position: relative;
+  margin: 1rem 5rem;
+
+  .categories__menu {
+    display: flex;
+
+    .category__item {
+      cursor: pointer;
+      font-size: 1.5rem;
+      margin: 1rem 2rem;
+      position: relative;
+      list-style: none;
+      color: white;
+
+      .category__icon {
+        position: relative;
+        top: 5px;
+        left: 5px;
+        transition: transform 0.5s ease-in-out;
+      }
+
+      &:hover,
+      &:focus {
+        .category__icon {
+          transform: rotate(180deg);
+        }
+      }
+    }
+  }
+}
