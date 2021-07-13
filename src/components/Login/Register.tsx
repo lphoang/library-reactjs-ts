@@ -115,6 +115,11 @@ function SignUp() {
                             Login
                         </Link>
                     </p>
+                    <p>Back to home page?
+                        <Link to="/" className="p-link">
+                            Click here
+                        </Link>
+                    </p>
                     <div className="btn-link">
                         <button type="submit">
                             Register
