@@ -9,6 +9,7 @@ import Home from "./components/Home";
 import Login from "./components/Login/Login"
 import Register from "./components/Login/Register";
 import VerifyEmail from "components/Login/VerifyEmail";
+import Book from "components/Book";
 
 function App() {
     return (
@@ -19,6 +20,7 @@ function App() {
                     <Route exact path="/login" component={Login}/>
                     <Route exact path="/register" component={Register}/>
                     <Route exact path="/verify-email" component={VerifyEmail}/>
+                    <Route path="/books/:id" component={Book}/>
                 </Switch>
             </Router>
         </div>

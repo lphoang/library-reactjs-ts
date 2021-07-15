@@ -1,0 +1,55 @@
+@import 'assets/styles/config';
+@import 'assets/styles/button';
+
+.book__container {
+    width: 80%;
+    height: 100%;
+    margin: 5rem auto;
+}
+
+.book {
+  width: 100%;
+  height: 100%;
+  display: flex;
+}
+
+.book__image {
+  width: 25%;
+  margin-right: 3rem;
+
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: inline-block;
+  }
+}
+
+.book__content {
+  color: white;
+  width: 70%;
+
+  span {
+    font-weight: 700;
+  }
+}
+
+.book__content--description{
+    padding: 1rem;
+    color: black;
+    margin-top: 2rem;
+    background: white;
+    border-radius: 10px;
+}
+
+.book__content--score{
+    margin-top: 3rem;
+}
+
+.book__content--price{
+    margin: 2rem 0;
+    span{
+        margin-left: 1rem;
+        color: rgb(255, 233, 108);
+    }
+}

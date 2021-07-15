@@ -41,7 +41,7 @@ function HeroSlider() {
                 {FEATURED_BOOK_IMAGES.map((slide, index) => (
                     <SlideCard
                         img={slide.image}
-                        index={index}
+                        key={index}
                         title={slide.title}
                         author={slide.author}
                         description={slide.description}

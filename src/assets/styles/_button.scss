@@ -1,8 +1,67 @@
+@import "./config";
+
+$white : white;
+$text-size: 17px;
+
 .btn {
-  background: $red-primary;
   border: none;
-  padding: 0.5rem 1rem;
-  color: white;
+  position: relative;
+  padding: 19px 22px;
+  transition: all 0.2s ease;
+  background: inherit;
+  margin: 1rem 2rem 0 0;
   cursor: pointer;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    display: block;
+    border-radius: 28px;
+    background: rgba($red-secondary, 0.75);
+    width: 56px;
+    height: 56px;
+    transition: all 0.3s ease;
+  }
+
+  span {
+    position: relative;
+    font-size: $text-size;
+    line-height: 18px;
+    font-weight: 900;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    vertical-align: middle;
+    color: $white;
+  }
+
+  svg {
+    font-size: $text-size;
+    position: relative;
+    top: 0;
+    margin-left: 10px;
+    fill: none;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    stroke: $white;
+    stroke-width: 2;
+    transform: translateX(-5px);
+    transition: all 0.3s ease;
+  }
+
+  &:hover {
+    &::before {
+      width: 100%;
+      background: rgba($red-secondary, 1);
+
+      svg {
+        transform: translateX(0);
+      }
+    }
+  }
+
+  &:active {
+    transform: scale(0.96);
+  }
 }

@@ -1,8 +1,8 @@
 import React from 'react';
 
-function SlideCard(slide: { img: any, index: number, title: string, author: string, description: string }) {
+function SlideCard(slide: { img: any, title: string, author: string, description: string }) {
     return (
-        <div className="slide" key={slide.index}>
+        <div className="slide">
             <div className="slide__image">
                 <img src={slide.img} alt="featured_book" />
             </div>
@@ -14,7 +14,7 @@ function SlideCard(slide: { img: any, index: number, title: string, author: stri
                 <div className="slide__content--description">
                     <p>{slide.description}</p>
                 </div>
-                <button className="slide__content--btn">
+                <button className="btn">
                     <span>
                         More details
                     </span>

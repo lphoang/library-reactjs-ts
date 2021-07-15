@@ -1,7 +1,7 @@
 import { IAppUser } from './../../utils/types/common';
 import { LoginRequest, RegisterRequest, IApiState } from 'utils/types';
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
-import auth, {
+import api, {
     getError,
     getErrorMsg,
     getSuccess,
@@ -37,27 +37,23 @@ const authSlice = createSlice({
 
 export const authLogin = ({ email, password }: LoginRequest) => (dispatch: any) => {
     dispatch(actions.authLoading());
-    return auth().login({ email, password })
+    return api().auth().login({ email, password })
         .then((response: any) => {
             dispatch(actions.authDone(response.data.user))
-            console.log(response);
         })
         .catch((error: any) => {
             dispatch(actions.authError(getErrorMsg(error)))
-            console.log(error.data.response);
         })
 }
 
 export const authRegister = ({ firstName, lastName, age, email, password }: RegisterRequest) => (dispatch: any) => {
     dispatch(actions.authLoading);
-    return auth().register({ firstName, lastName, age, email, password })
+    return api().auth().register({ firstName, lastName, age, email, password })
         .then((response: any) => {
-            dispatch(actions.authDone(response.data.appUser))
-            console.log(response);
+            dispatch(actions.authDone(response.data.user))
         })
         .catch((error: any) => {
             dispatch(actions.authError(getErrorMsg(error)))
-            console.log(error);
         })
 }
 

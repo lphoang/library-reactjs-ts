@@ -43,3 +43,15 @@ export interface IAppUser {
     password: string,
     username: string,
 }
+
+export interface IBook {
+    id: string,
+    title: string,
+    bookGenre: string,
+    author: string,
+    description: string,
+    releaseDate: string,
+    price: number,
+    score: number,
+    thumbnail: string,
+}

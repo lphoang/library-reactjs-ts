@@ -21,7 +21,7 @@ function SignUp() {
     const history = useHistory();
 
     useEffect(() => {
-        document.title = `Register`
+        document.title = `Thriftbooks | Register`
     });
 
     useEffect(() => {
@@ -42,6 +42,7 @@ function SignUp() {
             <img src={LoginImage} className="login-image" alt="" />
             <div className="login-form">
                 <h1>Create an account</h1>
+                <hr />
                 <ApiState {...apiState} />
                 <hr />
                 <form onSubmit={handleSubmit}>

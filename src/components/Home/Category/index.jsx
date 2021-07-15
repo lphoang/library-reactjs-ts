@@ -6,18 +6,14 @@ function Category() {
     return (
         <div className="categories__container">
             <ul className="categories__menu">
-                <li className="category__item">Feautured
+                <li className="category__items">Categories
                     <ChevronDownOutline
                         color={'white'}
                         cssClasses='category__icon'
                     />
-                </li>
-                <li className="category__item">
-                    Books
-                    <ChevronDownOutline
-                        color={'white'}
-                        cssClasses='category__icon'
-                    />
+                    <div className="category__item">
+                        <p>Hello world</p>
+                    </div>
                 </li>
             </ul>
         </div>

@@ -16,7 +16,7 @@ function Login() {
     const history = useHistory();
 
     useEffect(() => {
-        document.title = `Login`
+        document.title = `Thriftbooks | Login`
     });
 
     useEffect(() => {
@@ -34,8 +34,9 @@ function Login() {
             <img src={LoginImage} className="login-image" alt=""/>
             <div className="login-form">
                 <h1>Welcome back</h1>
-                <ApiState {...apiState}/>
                 <hr/>
+                <ApiState {...apiState}/>
+                <hr />
                 <form onSubmit={handleSubmit}>
                     <div>
                         <label>Email</label>
