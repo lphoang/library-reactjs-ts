@@ -47,11 +47,29 @@ export interface IAppUser {
 export interface IBook {
     id: string,
     title: string,
-    bookGenre: string,
-    author: string,
+    bookGenre: {
+        id: string,
+        title: string,
+    },
+    author: {
+        id: string,
+        fullName: string,
+    },
     description: string,
     releaseDate: string,
     price: number,
     score: number,
     thumbnail: string,
+}
+
+export interface IAuthor {
+    id: string,
+    fullName: string,
+    books: IBook[],
+}
+
+export interface IGenre {
+    id: string,
+    title: string,
+    books: IBook[],
 }

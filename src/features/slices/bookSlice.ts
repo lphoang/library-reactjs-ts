@@ -27,12 +27,15 @@ const bookSlice = createSlice({
     initialState: initialState,
     reducers: {
         bookLoading: (state) => { state.apiState = getLoading() },
-        bookDone: (state, action: PayloadAction<any>) => {
+        booksDone: (state, action: PayloadAction<any>) => {
             state.apiState = getSuccess(state.apiState);
             state.books = action.payload.data;
             state.pagination.currentPage = action.payload.currentPage;
             state.pagination.totalItems = action.payload.totalItems;
             state.pagination.totalPages = action.payload.totalPages;
+        },
+        bookDone: (state, action: PayloadAction<any>) => {
+            state.apiState = getSuccess(state.apiState);
             state.book = action.payload;
         },
         bookError: (state, action: PayloadAction<string>) => {
@@ -45,7 +48,7 @@ export const getAllBooks = () => async (dispatch: any) => {
     dispatch(actions.bookLoading);
     try {
         const response = await api().books().getAllBooks();
-        dispatch(actions.bookDone(response.data));
+        dispatch(actions.booksDone(response.data));
     } catch (error) {
         dispatch(actions.bookError(getErrorMsg(error)));
     }

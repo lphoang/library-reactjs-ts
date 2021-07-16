@@ -1,4 +1,4 @@
-import { IAppUser, IBook } from './../utils/types/common';
+import { IAppUser, IAuthor, IBook, IGenre } from './../utils/types/common';
 import axios from 'axios';
 import { IApiState, LoginRequest, RegisterRequest } from 'utils/types';
 
@@ -30,13 +30,35 @@ export function getInitialBookInfo() : IBook {
     return {
         id: "",
         title: "",
-        bookGenre: "",
-        author: "",
+        bookGenre: {
+            id: "",
+            title: ""
+        },
+        author: {
+            id: "",
+            fullName: "",
+        },
         releaseDate: "",
         price: 0,
         score: 0,
         thumbnail: "",
         description: ""
+    }
+}
+
+export function getInitialGenreInfo() : IGenre {
+    return {
+        id: "",
+        title: "",
+        books: [],
+    }
+}
+
+export function getInitialAuthorInfo() : IAuthor {
+    return {
+        id: "",
+        fullName: "",
+        books: [],
     }
 }
 
@@ -98,10 +120,26 @@ function books() {
     }
 }
 
+function authors() {
+    return {
+        getAllAuthors: () => instance.get('/authors'),
+        getAuthor: (id: string) => instance.get(`/authors/${id}`)
+    }
+}
+
+function bookGenres() {
+    return {
+        getAllGenres: () => instance.get('/genres'),
+        getGenre: (id: string) => instance.get(`/genres/${id}`)
+    }
+}
+
 export default function api() {
     return {
         auth,
         books,
+        authors,
+        bookGenres
     }
 }
 

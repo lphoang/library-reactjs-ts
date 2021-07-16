@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import Navbar from '../Global/Navbar'
 import HeroSlider from './HeroSlider';
-import Category from './Category';
+import Category from '../Global/Category';
 import Books from 'components/Books';
 
 function Home() {

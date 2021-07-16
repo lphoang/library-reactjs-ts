@@ -2,10 +2,9 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 
 function BookCard(book: { id: string, thumbnail: string, title: string, author: string, price: number }) {
-    const url = `/books/${book.id}`;
     return (
         <div className="card">
-            <Link to={url} style={{"textDecoration" : "none"}}>
+            <Link to={`/books/${book.id}`} style={{"textDecoration" : "none"}}>
                 <div className="card__container">
                     <div className="img__card">
                         <img src={book.thumbnail} alt="thumbnail" />
