@@ -8,9 +8,8 @@ import RatingStar from 'components/Global/RatingStar';
 import Category from 'components/Global/Category';
 import Loading from 'components/Global/Loading';
 
-
 function Book() {
-    const { id } = useParams<{ id: string }>();
+    const { id } = useParams();
     const dispatch = useAppDispatch();
     const state = useAppSelector((state: any) => state);
 
