@@ -44,10 +44,10 @@ const bookSlice = createSlice({
     }
 })
 
-export const getAllBooks = () => async (dispatch: any) => {
+export const getAllBooks = (page: number, size: number) => async (dispatch: any) => {
     dispatch(actions.bookLoading);
     try {
-        const response = await api().books().getAllBooks();
+        const response = await api().books().getAllBooks(page, size);
         dispatch(actions.booksDone(response.data));
     } catch (error) {
         dispatch(actions.bookError(getErrorMsg(error)));

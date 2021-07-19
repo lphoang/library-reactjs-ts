@@ -115,7 +115,7 @@ function auth() {
 
 function books() {
     return {
-        getAllBooks: () => instance.get('/books'),
+        getAllBooks: (page: number, size: number) => instance.get(`/books?page=${page}&size=${size}`),
         getBook: (id: string) => instance.get(`/books/${id}`)
     }
 }

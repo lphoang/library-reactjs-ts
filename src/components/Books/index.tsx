@@ -1,7 +1,7 @@
 import { useAppDispatch, useAppSelector } from 'app/hooks';
 import Loading from 'components/Global/Loading';
 import { getAllBooks } from 'features/slices/bookSlice';
-import React, { useEffect } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import BookCard from '../Global/BookCard';
 import './Books.scss'
 
@@ -9,9 +9,18 @@ function Books() {
     const dispatch = useAppDispatch();
     const state = useAppSelector((state) => state);
 
+    const [pagination, setPagination] = useState({
+        currentPage: 0,
+        totalItems: 76,
+        totalPages: 6,
+    })
+
     useEffect(() => {
-        dispatch(getAllBooks())
-    }, [dispatch]);
+        dispatch(getAllBooks(pagination.currentPage, 15));
+    }, [dispatch, pagination]);
+
+    const pagesArray = Array.from(Array(pagination.totalPages).keys());
+
 
     return (
         <>
@@ -29,7 +38,20 @@ function Books() {
                         />
                     ))}
                 </div>
+                <div className="pagination">
+                    {pagesArray && pagesArray.map((page, index) => (
+                        <div
+                            key={index}
+                            className={`paginationDot${pagination.currentPage === index ? " active" : ""}`}
+                            onClick={() => setPagination({
+                                ...pagination,
+                                currentPage: page
+                            })}
+                        ></div>
+                    ))}
+                </div>
             </section>
+
         </>
 
     );

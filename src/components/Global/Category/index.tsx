@@ -14,10 +14,6 @@ function Category() {
         dispatch(getAllGenres())
     }, [dispatch])
 
-    useEffect(() => {
-
-    }, [state.genres.genre.id])
-
 
     return (
         <div className="categories__container">
@@ -56,7 +52,7 @@ function Category() {
                                 color: "white"
                             }}
                         >
-                            {state.genres.genre ? state.genres.genre.title : state.books.book.bookGenre.title}
+                            {state.genres.genre.title ? state.genres.genre.title : state.books.book.bookGenre.title}
                         </Link>
                     </li>
                 )}
