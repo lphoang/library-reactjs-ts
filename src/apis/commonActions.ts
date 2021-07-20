@@ -105,7 +105,7 @@ export function getError(apiState: IApiState, errorMessage: string): IApiState {
 
 export function getErrorMsg(error: any) {
     let errMsg = '';
-    if (error.response) {
+    if (error) {
         errMsg = error.response.data.message;
     } else {
         errMsg = `Something wrong happened! ${error.message}`;
