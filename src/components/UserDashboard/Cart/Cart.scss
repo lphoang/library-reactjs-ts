@@ -1,0 +1,191 @@
+@import 'assets/styles/config';
+@import 'assets/styles/button';
+
+.thumbnail img {
+  max-width: 100%;
+  vertical-align: middle;
+  border-radius: 4px;
+}
+
+.container {
+  width: 90%;
+  margin: 0 auto;
+  overflow: hidden;
+}
+
+/* --- PRODUCT LIST --- */
+.books {
+  border-top: 1px solid #ddd;
+}
+
+.books > li {
+  padding: 1rem 0;
+  border-bottom: 1px solid #ddd;
+}
+
+.row {
+  position: relative;
+  overflow: hidden;
+  width: 100%;
+}
+
+.col,
+.quantity {
+  float: left;
+}
+
+.col.left {
+  width: 70%;
+}
+
+.col.right {
+  width: 30%;
+  position: absolute;
+  right: 0;
+  top: calc(50% - 30px);
+}
+
+.detail {
+  padding: 0 0.5rem;
+  line-height: 2.2rem;
+
+  a {
+    text-decoration: none;
+    color: white;
+    font-size: 20px;
+  }
+
+  a:hover {
+    color: $red-primary;
+  }
+
+  ul {
+    padding: 0;
+    margin: 0;
+    list-style-type: none;
+  }
+}
+
+.detail .name {
+  span {
+    font-size: 1.5rem;
+  }
+}
+
+.detail .price {
+  span {
+    font-size: 1.5rem;
+    color: white;
+  }
+}
+
+.quantity {
+  width: 70%;
+  text-align: center;
+  button {
+    background: $red-secondary;
+    color: #ffffff;
+    transition: all 0.25s linear;
+    cursor: pointer;
+    padding: 0.75rem;
+    margin: 1rem;
+
+    &:hover {
+      transform: scale(1.1);
+    }
+
+    &:focus {
+      outline: none;
+    }
+  }
+}
+
+/* --- SUMMARY --- */
+.summary,
+.checkout {
+  float: left;
+  width: 100%;
+  margin-top: 1.5rem;
+}
+
+.summary {
+  font-size: 1.2rem;
+  text-align: right;
+}
+
+.summary ul li {
+  padding: 0.5rem 0;
+}
+
+.summary ul li span {
+  display: inline-block;
+  width: 30%;
+}
+
+.summary ul li.total {
+  font-weight: bold;
+}
+
+.checkout {
+  text-align: right;
+  button {
+    margin: 0 5rem 5rem 0;
+  }
+}
+
+/* --- SMALL SCREEN --- */
+@media all and (max-width: 599px) {
+  .thumbnail img {
+    display: none;
+  }
+}
+
+/* --- MEDIUM & LARGE SCREEN --- */
+@media all and (min-width: 600px) {
+  html {
+    font-size: 14px;
+  }
+
+  .container {
+    width: 75%;
+    max-width: 960px;
+  }
+
+  .thumbnail,
+  .detail {
+    float: left;
+  }
+
+  .thumbnail {
+    width: 35%;
+    img {
+      height: 30%;
+      width: 30%;
+      object-fit: cover;
+    }
+  }
+
+  .detail {
+    width: 65%;
+  }
+
+  .summary {
+    width: 50%;
+  }
+
+  .checkout {
+    width: 100%;
+  }
+
+  .checkout,
+  .summary {
+    text-align: right;
+  }
+}
+
+/* --- LARGE SCREEN --- */
+@media all and (min-width: 992px) {
+  html {
+    font-size: 16px;
+  }
+}

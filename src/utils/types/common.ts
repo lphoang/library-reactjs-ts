@@ -32,13 +32,9 @@ export interface LoginRequest {
 }
 
 export interface ICart {
-    items: IBook[],
+    book: IBook,
     createdAd: string,
     id: string,
-    isPaid: boolean,
-    paidAt: string,
-    total: number,
-    updatedAt: string,
 }
 
 export interface IUser {

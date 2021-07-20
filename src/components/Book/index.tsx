@@ -14,7 +14,6 @@ function Book() {
     const { id } = useParams();
     const dispatch = useAppDispatch();
     const state = useAppSelector((state: any) => state);
-    const carts = state.user.user.carts;
 
     useEffect(() => {
         dispatch(getBook(id))
@@ -28,9 +27,14 @@ function Book() {
     const onClickHandler = (e: any) => {
         e.preventDefault();
         if (!state.auth.isLogged) {
-            history.push("/login")
+            alert("Your are not logged in yet!");
+            const timer = setTimeout(() => {
+                history.push("/login")
+            }, 1000)
+            return () => clearTimeout(timer)
         } else {
-            dispatch(addToCart(state.auth.accessToken, id, state.user.user.id, carts[carts.length - 1].id))
+            dispatch(addToCart(state.auth.accessToken, id, state.user.user.id))
+            alert("Added to cart!");
         }
     }
 
@@ -38,6 +42,7 @@ function Book() {
         <div>
             <Navbar />
             <Category />
+            {state.books.apiState.isLoading && <Loading />}
             {state.books.book && (
                 <div className="book__container">
                     {state.books.apiState.isLoading && <Loading />}

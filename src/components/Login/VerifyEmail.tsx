@@ -14,7 +14,7 @@ function VerifyEmail() {
     const onClickHandler = () => {
         window.open(url);
         const timer = setTimeout(() => {
-            history.push('/');
+            history.push('/login');
         }, 5000)
         return () => clearTimeout(timer);
     }

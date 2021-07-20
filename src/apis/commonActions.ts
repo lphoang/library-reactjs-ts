@@ -156,18 +156,19 @@ function user() {
         getUserInfo: (token: string, id: string) => instance.get(`/user/info/${id}`, {
             headers: { Authorization: `Bearer ${token}` }
         }),
-        addToCart: (token: string, bookId: string, appUserId: string, orderId: string | null) => instance.post(`/order/add`, {
+        addToCart: (token: string, bookId: string, appUserId: string) => instance.post(`/cart/add`, {
             bookId: bookId,
             appUserId: appUserId,
-            orderId: orderId,
         }, {
             headers: { Authorization: `Bearer ${token}` }
         }),
-        removeFromCart: (token: string, bookId: string, appUserId: string, orderId: string) => instance.post(`/order/remove`, {
+        removeFromCart: (token: string, bookId: string, appUserId: string) => instance.post(`/cart/remove`, {
             bookId: bookId,
-            orderId: orderId,
             appUserId: appUserId,
         }, {
+            headers: { Authorization: `Bearer ${token}` }
+        }),
+        getCartItems: (token: string, id: string) => instance.get(`/cart/${id}`, {
             headers: { Authorization: `Bearer ${token}` }
         })
     }

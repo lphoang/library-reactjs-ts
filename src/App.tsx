@@ -17,6 +17,7 @@ const Genre = React.lazy(() => import(`components/Genre`));
 const Author = React.lazy(() => import(`components/Author`));
 const BooksByTitle = React.lazy(() => import(`components/Global/SearchResult`));
 const Logout = React.lazy(() => import(`components/Logout`))
+const Cart = React.lazy(() => import(`components/UserDashboard/Cart`))
 
 function App() {
     return (
@@ -31,6 +32,7 @@ function App() {
                         <Route exact path="/verify-email" component={VerifyEmail} />
 
                         <Route path="/user/:id" component={User}/>
+                        <Route path="/cart/:id" component={Cart}/>
                         <Route path="/books/:id" component={Book} />
                         <Route path="/genres/:id" component={Genre} />
                         <Route path="/authors/:id" component={Author} />

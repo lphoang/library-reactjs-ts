@@ -41,7 +41,7 @@ function Category() {
                             >
                                 <p>Your purchase histories</p>
                             </Link>
-                            <Link to={`/cart`}
+                            <Link to={`/cart/${state.auth.user.id}`}
                                 style={{
                                     textDecoration: "none",
                                     color: "black"

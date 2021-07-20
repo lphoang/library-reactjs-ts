@@ -1,4 +1,5 @@
 import { useAppDispatch } from "app/hooks";
+import Loading from "components/Global/Loading";
 import { authLogout } from "features/slices/authSlice";
 import React, { useEffect } from "react";
 import { useHistory } from "react-router-dom";
@@ -16,7 +17,7 @@ function Logout() {
     }, 3000);
     return(
         <div>
-            <h1>LOGGING OUT</h1>
+            <Loading/>
         </div>
     )
 }
