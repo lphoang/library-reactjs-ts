@@ -24,7 +24,7 @@ const authSlice = createSlice({
         setIsLogged: (state) => { state.isLogged = true },
         setIsNotLogged: (state) => { state.isLogged = false },
         authLoading: (state) => { state.apiState = getLoading() },
-        authLogout: () => initialState,
+        authLogout: (state) => { return initialState },
         authDone: (state, action: PayloadAction<any>) => {
             state.apiState = getSuccess(state.apiState);
             state.user = action.payload.user;
@@ -51,7 +51,7 @@ export const authLogin = ({ email, password }: LoginRequest) => (dispatch: any) 
 }
 
 export const authRegister = ({ firstName, lastName, age, email, password }: RegisterRequest) => (dispatch: any) => {
-    dispatch(actions.authLoading);
+    dispatch(actions.authLoading());
     return api().auth().register({ firstName, lastName, age, email, password })
         .then((response: any) => {
             dispatch(actions.authDone(response.data))
@@ -62,8 +62,8 @@ export const authRegister = ({ firstName, lastName, age, email, password }: Regi
 }
 
 export const authLogout = (dispatch: any) => {
-    dispatch(actions.authLoading);
-    dispatch(actions.authLogout);
+    dispatch(actions.authLoading());
+    dispatch(actions.authLogout());
     localStorage.removeItem("state");
 }
 
