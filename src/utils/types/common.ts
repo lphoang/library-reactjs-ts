@@ -31,6 +31,29 @@ export interface LoginRequest {
     password: string,
 }
 
+export interface ICart {
+    items: IBook[],
+    createdAd: string,
+    id: string,
+    isPaid: boolean,
+    paidAt: string,
+    total: number,
+    updatedAt: string,
+}
+
+export interface IUser {
+    age: number,
+    role: string,
+    email: string,
+    enabled: boolean,
+    firstName: string,
+    id: string,
+    lastName: string,
+    locked: boolean,
+    password: string,
+    username: string,
+    carts: ICart[],
+}
 export interface IAppUser {
     age: number,
     role: string,

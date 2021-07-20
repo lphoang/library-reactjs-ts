@@ -7,11 +7,14 @@ import './Book.scss'
 import RatingStar from 'components/Global/RatingStar';
 import Category from 'components/Global/Category';
 import Loading from 'components/Global/Loading';
+import { useHistory } from 'react-router-dom';
+import { addToCart } from 'features/slices/userSlice';
 
 function Book() {
     const { id } = useParams();
     const dispatch = useAppDispatch();
     const state = useAppSelector((state: any) => state);
+    const carts = state.user.user.carts;
 
     useEffect(() => {
         dispatch(getBook(id))
@@ -20,6 +23,16 @@ function Book() {
     useEffect(() => {
         document.title = `${state.books.book.title}`
     }, [state.books.book])
+
+    const history = useHistory();
+    const onClickHandler = (e: any) => {
+        e.preventDefault();
+        if (!state.auth.isLogged) {
+            history.push("/login")
+        } else {
+            dispatch(addToCart(state.auth.accessToken, id, state.user.user.id, carts[carts.length - 1].id))
+        }
+    }
 
     return (
         <div>
@@ -65,7 +78,7 @@ function Book() {
                             <div className="book__content--price">
 
                             </div>
-                            <button className="btn">
+                            <button className="btn" onClick={onClickHandler}>
                                 <span>
                                     Add to cart
                                 </span>

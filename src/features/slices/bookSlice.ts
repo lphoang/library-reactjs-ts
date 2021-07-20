@@ -20,6 +20,7 @@ const initialState = {
     },
     books: initialBooks,
     book: getInitialBookInfo(),
+    searchBooks: initialBooks,
 }
 
 const bookSlice = createSlice({
@@ -37,6 +38,10 @@ const bookSlice = createSlice({
         bookDone: (state, action: PayloadAction<any>) => {
             state.apiState = getSuccess(state.apiState);
             state.book = action.payload;
+        },
+        searchBooksByTitle: (state, action: PayloadAction<any>) => {
+            state.apiState = getSuccess(state.apiState);
+            state.searchBooks = action.payload;
         },
         bookError: (state, action: PayloadAction<string>) => {
             state.apiState = getError(state.apiState, action.payload);
@@ -59,6 +64,16 @@ export const getBook = (id: string) => async (dispatch: any) => {
     try {
         const response = await api().books().getBook(id);
         dispatch(actions.bookDone(response.data));
+    } catch (error) {
+        dispatch(actions.bookError(getErrorMsg(error)));
+    }
+}
+
+export const getBookByTitle = (title: string) => async (dispatch: any) => {
+    dispatch(actions.bookLoading);
+    try {
+        const response = await api().books().getBookByTitle(title);
+        dispatch(actions.searchBooksByTitle(response.data));
     } catch (error) {
         dispatch(actions.bookError(getErrorMsg(error)));
     }

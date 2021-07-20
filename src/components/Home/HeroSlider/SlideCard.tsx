@@ -1,6 +1,7 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
-function SlideCard(slide: { img: any, title: string, author: string, description: string }) {
+function SlideCard(slide: { img: any, title: string, author: string, description: string, link: string }) {
     return (
         <div className="slide">
             <div className="slide__image">
@@ -14,15 +15,17 @@ function SlideCard(slide: { img: any, title: string, author: string, description
                 <div className="slide__content--description">
                     <p>{slide.description}</p>
                 </div>
-                <button className="btn">
-                    <span>
-                        More details
-                    </span>
-                    <svg width="13px" height="10px" viewBox="0 0 13 10">
-                        <path d="M1,5 L11,5" />
-                        <polyline points="8 1 12 5 8 9" />
-                    </svg>
-                </button>
+                <Link to={slide.link}>
+                    <button className="btn">
+                        <span>
+                            More details
+                        </span>
+                        <svg width="13px" height="10px" viewBox="0 0 13 10">
+                            <path d="M1,5 L11,5" />
+                            <polyline points="8 1 12 5 8 9" />
+                        </svg>
+                    </button>
+                </Link>
             </div>
         </div>
     );

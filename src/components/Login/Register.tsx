@@ -9,7 +9,6 @@ import "./Login.scss"
 
 function SignUp() {
     const apiState = useAppSelector(selectApiState);
-    const isLogged = useAppSelector(selectIsLogged);
     const dispatch = useAppDispatch();
     const [user, setUser] = useState({
         firstName: '',
@@ -23,10 +22,6 @@ function SignUp() {
     useEffect(() => {
         document.title = `Thriftbooks | Register`
     });
-
-    useEffect(() => {
-        isLogged && history.push('/');
-    },[isLogged])
 
     useEffect(() => {
         apiState.isSuccess && history.push('/verify-email');

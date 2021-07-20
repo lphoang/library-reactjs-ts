@@ -1,5 +1,5 @@
-import React, {useEffect, useState} from 'react';
-import {Link, useHistory} from "react-router-dom"
+import React, { useEffect, useState } from 'react';
+import { Link, useHistory } from "react-router-dom"
 
 import LoginImage from 'assets/images/old-library-book.jpg'
 import "./Login.scss"
@@ -11,6 +11,7 @@ function Login() {
     const apiState = useAppSelector(selectApiState);
     const isLogged = useAppSelector(selectIsLogged);
     const dispatch = useAppDispatch();
+    const state = useAppSelector((state) => state);
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const history = useHistory();
@@ -21,45 +22,49 @@ function Login() {
 
     useEffect(() => {
         isLogged && history.push('/')
-    },[isLogged])
+    }, [isLogged])
 
-    function handleSubmit(e : any){
+    function handleSubmit(e: any) {
         e.preventDefault();
-        console.log("Trying to login", {email, password});
-        dispatch(authLogin({email, password}));
+        console.log("Trying to login", { email, password });
+        dispatch(authLogin({ email, password }));
+        // const timer = setTimeout(() => {
+        //     !state.auth.user.enabled && history.push('/verify-email')
+        // }, 3000)
+        // return () => clearTimeout(timer)
     }
 
     return (
         <div className="login-container">
-            <img src={LoginImage} className="login-image" alt=""/>
+            <img src={LoginImage} className="login-image" alt="" />
             <div className="login-form">
                 <h1>Welcome back</h1>
-                <hr/>
-                <ApiState {...apiState}/>
+                <hr />
+                <ApiState {...apiState} />
                 <hr />
                 <form onSubmit={handleSubmit}>
                     <div>
                         <label>Email</label>
-                        <input 
-                        type="email" 
-                        placeholder="Enter your email"
-                        value={email}
-                        onChange={
-                            (e) => setEmail(e.target.value)
-                        }/>
+                        <input
+                            type="email"
+                            placeholder="Enter your email"
+                            value={email}
+                            onChange={
+                                (e) => setEmail(e.target.value)
+                            } />
                     </div>
-                    <hr/>
+                    <hr />
                     <div>
                         <label>Password</label>
-                        <input 
-                        type="password" 
-                        placeholder="Enter your password"
-                        value={password}
-                        onChange={
-                            (e) => setPassword(e.target.value)
-                        }/>
+                        <input
+                            type="password"
+                            placeholder="Enter your password"
+                            value={password}
+                            onChange={
+                                (e) => setPassword(e.target.value)
+                            } />
                     </div>
-                    <hr/>
+                    <hr />
                     <p>Don't have account yet?
                         <Link to="/register" className="p-link">
                             Join us

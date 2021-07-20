@@ -1,7 +1,7 @@
 import { useAppDispatch, useAppSelector } from 'app/hooks';
 import Loading from 'components/Global/Loading';
 import { getAllBooks } from 'features/slices/bookSlice';
-import React, { useCallback, useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import BookCard from '../Global/BookCard';
 import './Books.scss'
 
@@ -11,7 +11,7 @@ function Books() {
 
     const [pagination, setPagination] = useState({
         currentPage: 0,
-        totalItems: 76,
+        totalItems: 80,
         totalPages: 6,
     })
 

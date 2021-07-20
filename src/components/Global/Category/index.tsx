@@ -18,6 +18,40 @@ function Category() {
     return (
         <div className="categories__container">
             <ul className="categories__menu">
+                {state.auth.isLogged && (
+                    <li className="category__items">Profile
+                        <ChevronDownOutline
+                            color={'white'}
+                            cssClasses='category__icon'
+                        />
+                        <div className="category__item--profile">
+                            <Link to={`/user/${state.auth.user.id}`}
+                                style={{
+                                    textDecoration: "none",
+                                    color: "black"
+                                }}
+                            >
+                                <p>Your profile</p>
+                            </Link>
+                            <Link to={`/user/${state.auth.user.id}`}
+                                style={{
+                                    textDecoration: "none",
+                                    color: "black"
+                                }}
+                            >
+                                <p>Your purchase histories</p>
+                            </Link>
+                            <Link to={`/cart`}
+                                style={{
+                                    textDecoration: "none",
+                                    color: "black"
+                                }}
+                            >
+                                <p>Your cart</p>
+                            </Link>
+                        </div>
+                    </li>
+                )}
                 <li className="category__items">Genres
                     <ChevronDownOutline
                         color={'white'}

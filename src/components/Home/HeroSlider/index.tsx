@@ -45,6 +45,7 @@ function HeroSlider() {
                         title={slide.title}
                         author={slide.author}
                         description={slide.description}
+                        link={slide.link}
                     />
                 ))}
             </div>

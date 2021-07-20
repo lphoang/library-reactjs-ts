@@ -6,6 +6,6 @@ export default function ApiState({ isLoading, isSuccess, isError, errorMessage }
     return <>
         {isLoading && <Loading/>}
         {isSuccess && <p style={{ "color": "white", "textAlign": "center", "margin": "1rem" }}>Done!</p>}
-        {isError && <p style={{ "color": "white", "textAlign": "center", "margin": "1rem" }}>{errorMessage}</p>}
+        {isError && <p style={{ "color": "red", "textAlign": "center", "margin": "1rem" }}>{errorMessage}</p>}
     </>;
 }

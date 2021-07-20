@@ -1,4 +1,4 @@
-import { IAppUser, IAuthor, IBook, IGenre } from './../utils/types/common';
+import { IAppUser, IAuthor, IBook, IGenre, IUser } from './../utils/types/common';
 import axios from 'axios';
 import { IApiState, LoginRequest, RegisterRequest } from 'utils/types';
 
@@ -11,10 +11,10 @@ export function getLoading(): IApiState {
     };
 }
 
-export function getInitialUserInfo(): IAppUser {
+export function getInitialAppUserInfo(): IAppUser {
     return {
         age: 0,
-        role: "USER",
+        role: "",
         email: "",
         enabled: false,
         firstName: "",
@@ -26,7 +26,23 @@ export function getInitialUserInfo(): IAppUser {
     }
 }
 
-export function getInitialBookInfo() : IBook {
+export function getInitialUserInfo(): IUser {
+    return {
+        age: 0,
+        role: "",
+        email: "",
+        enabled: false,
+        firstName: "",
+        id: "",
+        lastName: "",
+        locked: false,
+        password: "",
+        username: "",
+        carts: [],
+    }
+}
+
+export function getInitialBookInfo(): IBook {
     return {
         id: "",
         title: "",
@@ -46,7 +62,7 @@ export function getInitialBookInfo() : IBook {
     }
 }
 
-export function getInitialGenreInfo() : IGenre {
+export function getInitialGenreInfo(): IGenre {
     return {
         id: "",
         title: "",
@@ -54,7 +70,7 @@ export function getInitialGenreInfo() : IGenre {
     }
 }
 
-export function getInitialAuthorInfo() : IAuthor {
+export function getInitialAuthorInfo(): IAuthor {
     return {
         id: "",
         fullName: "",
@@ -116,7 +132,8 @@ function auth() {
 function books() {
     return {
         getAllBooks: (page: number, size: number) => instance.get(`/books?page=${page}&size=${size}`),
-        getBook: (id: string) => instance.get(`/books/${id}`)
+        getBook: (id: string) => instance.get(`/books/${id}`),
+        getBookByTitle: (title: string) => instance.get(`/books/search?t=${title}`)
     }
 }
 
@@ -134,8 +151,31 @@ function bookGenres() {
     }
 }
 
+function user() {
+    return {
+        getUserInfo: (token: string, id: string) => instance.get(`/user/info/${id}`, {
+            headers: { Authorization: `Bearer ${token}` }
+        }),
+        addToCart: (token: string, bookId: string, appUserId: string, orderId: string | null) => instance.post(`/order/add`, {
+            bookId: bookId,
+            appUserId: appUserId,
+            orderId: orderId,
+        }, {
+            headers: { Authorization: `Bearer ${token}` }
+        }),
+        removeFromCart: (token: string, bookId: string, appUserId: string, orderId: string) => instance.post(`/order/remove`, {
+            bookId: bookId,
+            orderId: orderId,
+            appUserId: appUserId,
+        }, {
+            headers: { Authorization: `Bearer ${token}` }
+        })
+    }
+}
+
 export default function api() {
     return {
+        user,
         auth,
         books,
         authors,

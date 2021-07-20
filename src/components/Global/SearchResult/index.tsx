@@ -1,34 +1,30 @@
 import { useAppDispatch, useAppSelector } from 'app/hooks';
 import BookCard from 'components/Global/BookCard';
-import Category from 'components/Global/Category';
 import Loading from 'components/Global/Loading';
 import Navbar from 'components/Global/Navbar';
-import { getGenre } from 'features/slices/genreSlice';
+import { getBookByTitle } from 'features/slices/bookSlice';
 import React, { useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import 'components/Books/Books.scss'
 
-function Genre() {
-    const { id } = useParams();
+function SearchResult() {
     const dispatch = useAppDispatch();
-    const state = useAppSelector((state: any) => state);
+    const state = useAppSelector((state) => state);
+    const { t } = useParams();
 
     useEffect(() => {
-        dispatch(getGenre(id))
-    }, [dispatch, id])
-
-    useEffect(() => {
-        document.title = `${state.genres.genre.title}`
-    }, [state.genres.genre])
+        dispatch(getBookByTitle(t))
+    }, [t])
 
     return (
         <>
             <Navbar />
-            <Category />
-            {state.genres.apiState.isLoading && <Loading />}
+            {state.books.apiState.isLoading && <Loading />}
             <section>
+                <h1 style={{ "color": "white" }}>
+                    {`${state.books.searchBooks ? state.books.searchBooks.length : 0} results for searching by "${t}"`}</h1>
                 <div className="book__cards__container">
-                    {state.genres.genre && state.genres.genre.books.map((book: any) => (
+                    {state.books.searchBooks && state.books.searchBooks.map((book: any) => (
                         <BookCard
                             key={book.id}
                             thumbnail={book.thumbnail}
@@ -41,8 +37,7 @@ function Genre() {
                 </div>
             </section>
         </>
-
     );
 }
 
-export default Genre;
+export default SearchResult;

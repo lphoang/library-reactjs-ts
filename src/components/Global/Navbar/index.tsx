@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 import { NavMenu } from 'utils/types';
 import { useAppSelector } from 'app/hooks';
 import { selectIsLogged } from 'features/slices/authSlice';
+import SearchForm from './SearchForm';
 
 const navMenu: NavMenu[] = [{
     name: 'Home',
@@ -36,6 +37,9 @@ function Navbar() {
                 <div className="nav__icon">
                     <img src="https://pbs.twimg.com/profile_images/1238211348183412736/IBJfsrHo_400x400.jpg" alt="icon" />
                     <h1>Thriftbooks</h1>
+                </div>
+                <div className="search__form">
+                    <SearchForm />
                 </div>
                 <div className="nav__items">
                     {isLogged ?
