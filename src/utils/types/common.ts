@@ -32,6 +32,7 @@ export interface LoginRequest {
 }
 
 export interface ICart {
+    quantity: number,
     book: IBook,
     createdAd: string,
     id: string,

@@ -33,7 +33,7 @@ function Book() {
             }, 1000)
             return () => clearTimeout(timer)
         } else {
-            dispatch(addToCart(state.auth.accessToken, id, state.user.user.id))
+            dispatch(addToCart(state.auth.accessToken, id, state.auth.user.id))
             alert("Added to cart!");
         }
     }

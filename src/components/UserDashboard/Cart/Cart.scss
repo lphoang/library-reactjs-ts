@@ -35,7 +35,7 @@
 }
 
 .col.left {
-  width: 70%;
+  width: 60%;
 }
 
 .col.right {
@@ -82,21 +82,13 @@
 .quantity {
   width: 70%;
   text-align: center;
-  button {
-    background: $red-secondary;
-    color: #ffffff;
-    transition: all 0.25s linear;
-    cursor: pointer;
-    padding: 0.75rem;
-    margin: 1rem;
-
-    &:hover {
-      transform: scale(1.1);
-    }
-
-    &:focus {
-      outline: none;
-    }
+  display: flex;
+  justify-content: flex-end;
+  p{
+    color: white;
+    padding: 1rem;
+    font-size: 30px;
+    font-weight: 600;
   }
 }
 
@@ -111,6 +103,7 @@
 .summary {
   font-size: 1.2rem;
   text-align: right;
+  color: white;
 }
 
 .summary ul li {
@@ -124,6 +117,7 @@
 
 .summary ul li.total {
   font-weight: bold;
+  font-size: 2rem;
 }
 
 .checkout {
@@ -142,10 +136,6 @@
 
 /* --- MEDIUM & LARGE SCREEN --- */
 @media all and (min-width: 600px) {
-  html {
-    font-size: 14px;
-  }
-
   .container {
     width: 75%;
     max-width: 960px;
@@ -180,12 +170,5 @@
   .checkout,
   .summary {
     text-align: right;
-  }
-}
-
-/* --- LARGE SCREEN --- */
-@media all and (min-width: 992px) {
-  html {
-    font-size: 16px;
   }
 }

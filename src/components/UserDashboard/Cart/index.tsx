@@ -14,17 +14,18 @@ function Cart() {
 
     useEffect(() => {
         dispatch(getCartItems(state.auth.accessToken, id))
-    }, [dispatch])
+    }, [state.user.carts, dispatch])
 
     const onRemoveItem = (bookId: string) => {
         dispatch(removeFromCart(state.auth.accessToken, bookId, id));
-        alert("Remove successly");
+        alert("Remove successfully");
     }
 
     const onAddItem = (bookId: string) => {
         dispatch(addToCart(state.auth.accessToken, bookId, id));
-        alert("Add successly");
+        alert("Add successfully");
     }
+    let total = 0;
 
     return (
         <>
@@ -35,6 +36,7 @@ function Cart() {
                     <section className="container">
                         <ul className="books">
                             {state.user.carts && state.user.carts.map((cart, index) => {
+                                total += (cart.quantity * cart.book.price);
                                 return (
                                     <li className="row" key={index}>
                                         <div className="col left">
@@ -56,10 +58,11 @@ function Cart() {
 
                                         <div className="col right">
                                             <div className="quantity">
-                                                <button onClick={() => onRemoveItem(cart.book.id)}>
+                                                <button onClick={() => onRemoveItem(cart.book.id)} className="button button--mimas">
                                                     -
                                                 </button>
-                                                <button onClick={() => onAddItem(cart.book.id)}>
+                                                <p>{cart.quantity}</p>
+                                                <button onClick={() => onAddItem(cart.book.id)} className="button button--mimas">
                                                     +
                                                 </button>
                                             </div>
@@ -72,11 +75,8 @@ function Cart() {
                     <section className="container">
                         <div className="summary">
                             <ul>
-                                <li>
-                                    Subtotal <span>${"subTotal"}</span>
-                                </li>
                                 <li className="total">
-                                    Total <span>${"total"}</span>
+                                    Total <span>${total}</span>
                                 </li>
                             </ul>
                         </div>
@@ -92,9 +92,9 @@ function Cart() {
                         </div>
                     </section>
                 </div>
-            : <div>
-                <h1> There is no items in cart </h1>
-            </div>}
+                : <div>
+                    <h1> There is no items in cart </h1>
+                </div>}
         </>
     );
 }
