@@ -6,6 +6,7 @@ import {
 } from "react-router-dom";
 
 import Loading from "components/Global/Loading";
+import { Redirect } from "react-router-dom";
 
 const Home = React.lazy(() => import(`components/Home`));
 const Login = React.lazy(() => import(`components/Login/Login`));
@@ -25,7 +26,8 @@ function App() {
             <Suspense fallback={<Loading />}>
                 <Router>
                     <Switch>
-                        <Route exact path="/" component={Home} />
+                        <Redirect exact from="/" to={`/page=0&size=15`}/>
+                        <Route exact path={`/page=:page?&size=:size?`} component={Home} />
                         <Route exact path="/login" component={Login} />
                         <Route exact path="/logout" component={Logout} />
                         <Route exact path="/register" component={Register} />

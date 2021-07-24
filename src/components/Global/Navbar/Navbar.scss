@@ -57,10 +57,11 @@ $color: #ffffff;
 }
 
 .search__form {
-  width: 40%;
+  width: 60%;
   form {
     padding: 1.25rem;
     width: 100%;
+    text-align: center;
     label {
       width: 10%;
     }
@@ -70,14 +71,16 @@ $color: #ffffff;
       outline: none;
       padding: 1.25rem;
 
-      &:focus,&:hover{
+      &:focus,
+      &:hover {
         border: 1px solid $background2;
       }
     }
+    span{
+      text-align: center;
+    }
   }
 }
-
-
 
 @media screen and (max-width: 992px) {
   .search__form {
@@ -94,7 +97,51 @@ $color: #ffffff;
         outline: none;
         padding: 1.25rem;
       }
-      button{
+      button {
+        width: 40%;
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 1366px) {
+  .search__form {
+    width: 40%;
+    form {
+      padding: 1.25rem;
+      width: 100%;
+      label {
+        width: 10%;
+      }
+      input {
+        width: 40%;
+        border-radius: 0.5rem 0 0 0.5rem;
+        outline: none;
+        padding: 1.25rem;
+      }
+      button {
+        width: 40%;
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 1600px) {
+  .search__form {
+    width: 70%;
+    form {
+      padding: 1.25rem;
+      width: 100%;
+      label {
+        width: 10%;
+      }
+      input {
+        width: 40%;
+        border-radius: 0.5rem 0 0 0.5rem;
+        outline: none;
+        padding: 1.25rem;
+      }
+      button {
         width: 40%;
       }
     }

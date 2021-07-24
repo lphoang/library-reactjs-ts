@@ -2,22 +2,26 @@ import { useAppDispatch, useAppSelector } from 'app/hooks';
 import Loading from 'components/Global/Loading';
 import { getAllBooks } from 'features/slices/bookSlice';
 import React, { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import BookCard from '../Global/BookCard';
 import './Books.scss'
 
 function Books() {
     const dispatch = useAppDispatch();
     const state = useAppSelector((state) => state);
+    const { page } = useParams();
+    const { size } = useParams();
 
     const [pagination, setPagination] = useState({
-        currentPage: 0,
-        totalItems: 80,
-        totalPages: 6,
+        currentPage: page,
+        totalItems: 100,
+        totalPages: 7,
     })
 
     useEffect(() => {
-        dispatch(getAllBooks(pagination.currentPage, 15));
-    }, [dispatch, pagination]);
+        dispatch(getAllBooks(pagination.currentPage, size));
+    }, [dispatch, pagination, size]);
 
     const pagesArray = Array.from(Array(pagination.totalPages).keys());
 
@@ -40,14 +44,15 @@ function Books() {
                 </div>
                 <div className="pagination">
                     {pagesArray && pagesArray.map((page, index) => (
-                        <div
-                            key={index}
-                            className={`paginationDot${pagination.currentPage === index ? " active" : ""}`}
-                            onClick={() => setPagination({
-                                ...pagination,
-                                currentPage: page
-                            })}
-                        ></div>
+                        <Link to={`/page=${page}&size=15`} key={index}>
+                            <div
+                                className={`paginationDot${pagination.currentPage === index ? " active" : ""}`}
+                                onClick={() => setPagination({
+                                    ...pagination,
+                                    currentPage: page
+                                })}
+                            ></div>
+                        </Link>
                     ))}
                 </div>
             </section>

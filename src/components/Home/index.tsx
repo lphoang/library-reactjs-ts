@@ -8,6 +8,10 @@ function Home() {
     useEffect(() => {
         document.title = `Thriftbooks | Home`
     });
+
+    useEffect(() => {
+        window.scrollTo(0, 0);
+    })
     
     return (
         <>
