@@ -76,7 +76,7 @@ function Cart() {
                         <div className="summary">
                             <ul>
                                 <li className="total">
-                                    Total <span>${total}</span>
+                                    Total <span>${(total).toFixed(2)}</span>
                                 </li>
                             </ul>
                         </div>
