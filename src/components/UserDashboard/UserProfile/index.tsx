@@ -18,6 +18,13 @@ function UserProfile() {
         return () => clearTimeout(timer)
     }, [dispatch, state.auth.accessToken, id])
 
+    const removeDuplicate = (arr: any) => {
+        return Array.from(new Set(arr.map((a: { id: any; }) => a.id)))
+            .map(id => {
+                return arr.find((a: { id: any; }) => a.id === id)
+            })
+    }
+
     return (
         <>
             <Navbar />
@@ -50,19 +57,20 @@ function UserProfile() {
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    {state.user.user.checkoutCart && state.user.user.checkoutCart.map((cart: any, index: number) => (
-                                        <tr key={index}>
-                                            <td>{index + 1}</td>
-                                            <td>{cart.deliveryAddress}</td>
-                                            <td>{cart.paymentType}</td>
-                                            <td>{cart.checkedOutAt && cart.checkedOutAt.slice(0, 5).join(" : ")}</td>
-                                            <td>
-                                                <Link to={`/orders/${cart.id}`}>
-                                                    Click here
-                                                </Link>
-                                            </td>
-                                        </tr>
-                                    ))}
+                                    {state.user.user.checkoutCart && removeDuplicate(state.user.user.checkoutCart)
+                                        .map((cart: any, index: number) => (
+                                            <tr key={index}>
+                                                <td>{index + 1}</td>
+                                                <td>{cart.deliveryAddress}</td>
+                                                <td>{cart.paymentType}</td>
+                                                <td>{cart.checkedOutAt && cart.checkedOutAt.slice(0, 5).join(" : ")}</td>
+                                                <td>
+                                                    <Link to={`/orders/${cart.id}`}>
+                                                        Click here
+                                                    </Link>
+                                                </td>
+                                            </tr>
+                                        ))}
                                 </tbody>
                             </table>
                         </div>
@@ -74,3 +82,7 @@ function UserProfile() {
 }
 
 export default UserProfile;
+
+function obj(obj: any, arg1: (i: any, el: any) => void) {
+    throw new Error('Function not implemented.');
+}
