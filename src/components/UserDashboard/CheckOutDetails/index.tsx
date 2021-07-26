@@ -1,49 +1,57 @@
 import { useAppDispatch, useAppSelector } from 'app/hooks';
-import Category from 'components/Global/Category';
 import Navbar from 'components/Global/Navbar';
-import { addToCart, getCartItems, removeFromCart } from 'features/slices/userSlice';
 import React, { useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import '../Cart/Cart.scss'
 import { useParams } from 'react-router-dom';
-import CheckOut from '../CheckOut';
+import Category from 'components/Global/Category';
+import Loading from 'components/Global/Loading';
+import { useHistory } from 'react-router-dom';
+import { getCheckoutCart } from 'features/slices/userSlice';
+import { Link } from 'react-router-dom';
 
-import "./Cart.scss"
-
-function Cart() {
-    const dispatch = useAppDispatch();
-    const state = useAppSelector((state) => state);
+function CheckOutDetails() {
     const { id } = useParams();
+    const dispatch = useAppDispatch();
+    const state = useAppSelector((state: any) => state);
 
     useEffect(() => {
-        dispatch(getCartItems(state.auth.accessToken, id))
-    }, [dispatch, id, state.auth.accessToken, state.user.carts])
+        dispatch(getCheckoutCart(state.auth.accessToken, id))
+    }, [dispatch, id, state.auth.accessToken])
 
     useEffect(() => {
-        document.title="Cart";
-    })
+        document.title = `${state.books.book.title}`
+    }, [state.books.book])
 
-    const onRemoveItem = (bookId: string) => {
-        dispatch(removeFromCart(state.auth.accessToken, bookId, id));
-        alert("Remove successfully");
-    }
-
-    const onAddItem = (bookId: string) => {
-        dispatch(addToCart(state.auth.accessToken, bookId, id));
-        alert("Add successfully");
-    }
-    const orderDetail = state.user.carts && state.user.carts.filter((cart) => !cart.isPaid);
+    const history = useHistory();
+    useEffect(() => {
+        !state.auth.isLogged && history.push("/login");
+    }, [history, state.auth.isLogged])
     let total = 0;
 
     return (
-        <>
+        <div>
             <Navbar />
             <Category />
-            {state.user.carts &&
+            {state.user.apiState.isLoading && <Loading />}
+            {state.user.checkedoutCart &&
                 <div>
+                    <section className="header">
+                        <h1>
+                            {`Checked out at : ${(state.user.checkedoutCart.checkedOutAt).slice(0,6).join(" - ")}`}
+                        </h1>
+                        <hr />
+                        <h1>
+                            {`Delivery to : ${state.user.checkedoutCart.deliveryAddress}`}
+                        </h1>
+                        <hr />
+                        <h1>
+                            {`Payment method : ${state.user.checkedoutCart.paymentType}`}
+                        </h1>
+                    </section>
                     <section className="container">
                         <ul className="books">
-                            {orderDetail.length > 0 ?
-                                orderDetail[0].cartList.map((cart, index) => {
+                            {state.user.checkedoutCart &&
+                                state.user.checkedoutCart.orderDetail.cartList.map((cart: any, index: any) => {
                                     total += cart.total;
                                     return (
                                         <li className="row" key={index}>
@@ -66,20 +74,12 @@ function Cart() {
 
                                             <div className="col right">
                                                 <div className="quantity">
-                                                    <button onClick={() => onRemoveItem(cart.book.id)} className="button button--mimas">
-                                                        -
-                                                    </button>
                                                     <p>{cart.quantity}</p>
-                                                    <button onClick={() => onAddItem(cart.book.id)} className="button button--mimas">
-                                                        +
-                                                    </button>
                                                 </div>
                                             </div>
                                         </li>
                                     );
-                                }) : (<h1>
-                                    There is no books in cart
-                                </h1>)}
+                                })}
                         </ul>
                     </section>
                     <section className="container">
@@ -90,14 +90,12 @@ function Cart() {
                                 </li>
                             </ul>
                         </div>
-                        <div className="checkout">
-                            <CheckOut />
-                        </div>
                     </section>
                 </div>
             }
-        </>
+        </div>
     );
 }
 
-export default Cart;
+
+export default CheckOutDetails;

@@ -1,10 +1,10 @@
 import { useAppDispatch, useAppSelector } from 'app/hooks';
-import PurchaseHistories from '../PurchaseHistories';
 import Category from 'components/Global/Category';
 import Loading from 'components/Global/Loading';
 import Navbar from 'components/Global/Navbar';
 import { getUserInfo } from 'features/slices/userSlice';
 import React, { useEffect } from 'react';
+import { Link } from 'react-router-dom';
 import { useParams } from 'react-router-dom';
 import './Profile.scss'
 function UserProfile() {
@@ -38,18 +38,34 @@ function UserProfile() {
                             <span>Your age: </span>{state.user.user.age}
                         </p>
                         <h3>Your purchase histories: </h3>
-                        <button className="btn">
-                            <span>
-                                Click here
-                            </span>
-                            <svg width="13px" height="10px" viewBox="0 0 13 10">
-                                <path d="M1,5 L11,5" />
-                                <polyline points="8 1 12 5 8 9" />
-                            </svg>
-                        </button>
-                        {/* <PurchaseHistories
-                            carts={state.user.user.carts}
-                        /> */}
+                        <div>
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th>ID</th>
+                                        <th>Delivery to</th>
+                                        <th>Payment method</th>
+                                        <th>Paid at</th>
+                                        <th>Details</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {state.user.user.checkoutCart && state.user.user.checkoutCart.map((cart: any, index: number) => (
+                                        <tr key={index}>
+                                            <td>{index + 1}</td>
+                                            <td>{cart.deliveryAddress}</td>
+                                            <td>{cart.paymentType}</td>
+                                            <td>{cart.checkedOutAt && cart.checkedOutAt.slice(0, 5).join(" : ")}</td>
+                                            <td>
+                                                <Link to={`/orders/${cart.id}`}>
+                                                    Click here
+                                                </Link>
+                                            </td>
+                                        </tr>
+                                    ))}
+                                </tbody>
+                            </table>
+                        </div>
                     </div>
                 </div>
             </section>

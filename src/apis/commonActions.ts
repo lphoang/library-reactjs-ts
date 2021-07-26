@@ -1,4 +1,4 @@
-import { IAppUser, IAuthor, IBook, IGenre, IUser } from './../utils/types/common';
+import { IAppUser, IAuthor, IBook, ICheckout, IGenre, IUser } from './../utils/types/common';
 import axios from 'axios';
 import { IApiState, LoginRequest, RegisterRequest } from 'utils/types';
 
@@ -38,7 +38,7 @@ export function getInitialUserInfo(): IUser {
         locked: false,
         password: "",
         username: "",
-        carts: [],
+        checkoutCart: [],
     }
 }
 
@@ -170,6 +170,16 @@ function user() {
         }),
         getCartItems: (token: string, id: string) => instance.get(`/cart/${id}`, {
             headers: { Authorization: `Bearer ${token}` }
+        }),
+        getCheckoutCart: (token: string, id: string) => instance.get(`/user/cart/${id}`, {
+            headers: { Authorization: `Bearer ${token}` }
+        }),
+        checkOut: (request: ICheckout) => instance.post(`/check-out`, {
+            orderId: request.orderId,
+            paymentType: request.paymentType,
+            deliveryAddress: request.deliveryAddress,
+        }, {
+            headers: { Authorization: `Bearer ${request.token}` }
         })
     }
 }

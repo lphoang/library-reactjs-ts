@@ -1,0 +1,80 @@
+@import 'assets/styles/button';
+@import 'assets/styles/config';
+
+.checkout__container {
+  h1 {
+    margin: 1rem auto;
+    text-transform: uppercase;
+  }
+}
+
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.6);
+
+  .modal-main {
+    position: fixed;
+    background: white;
+    width: 30%;
+    height: 50vh;
+    top: 50%;
+    left: 50%;
+    border-radius: 15px;
+    transform: translate(-50%, -50%);
+    overflow: hidden;
+  }
+}
+
+.modal--footer{
+    width: 100%;
+    margin: 0 auto;
+}
+
+.modal--container {
+  width: 100%;
+  height: 100%;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.display-block {
+  display: block;
+}
+
+.display-none {
+  display: none;
+}
+.modal--header {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  svg {
+    width: 25px;
+    height: 25px;
+  }
+}
+
+.payment--type {
+  margin: 1rem;
+  font-size: 1.25rem;
+}
+
+.delivery--address {
+  font-size: 1.25rem;
+  input{
+      margin-top: 1rem;
+      padding: 0.5rem;
+  }
+}
+
+.form-checkout {
+  .button {
+    margin-top: 2rem;
+  }
+}

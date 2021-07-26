@@ -23,7 +23,17 @@
 table {
     border-collapse: collapse;
     width: 100%;
-}
+  }
+  
+  td, th {
+    border: 1px solid rgba($color: $background2, $alpha: 0.9);
+    text-align: left;
+    padding: 8px;
+  }
+  
+  tr:nth-child(even) {
+    background-color: $background2;
+  }
 
 .user__info{
     width: 60%;
@@ -33,12 +43,18 @@ table {
         color: $brown;
         font-size: 2rem;
     }
+    h3{
+        margin: 1rem 0rem;
+    }
     p{
         background: white;
         color: black;
         padding: 1rem;
         margin: 0.5rem 0;
         border-radius: 10px;
+    }
+    td{
+        text-decoration: none;
     }
 }
 

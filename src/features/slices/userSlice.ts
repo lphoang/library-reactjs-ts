@@ -1,3 +1,4 @@
+import { IOrderDetails, ICheckout } from './../../utils/types/common';
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 import api, {
     getError,
@@ -7,13 +8,14 @@ import api, {
     getInitialApi,
     getInitialUserInfo,
 } from 'apis/commonActions'
-import { ICart } from 'utils/types';
 
-const initialCarts: ICart[] = [];
+const initialCarts: IOrderDetails[] = [];
 const initialState = {
     apiState: getInitialApi(),
     user: getInitialUserInfo(),
     carts: initialCarts,
+    purchasedBill: {},
+    checkedoutCart: {},
 }
 
 const userSlice = createSlice({
@@ -37,7 +39,15 @@ const userSlice = createSlice({
         getCartItems: (state, action: PayloadAction<any>) => {
             state.apiState = getSuccess(state.apiState);
             state.carts = action.payload;
-        }
+        },
+        getCheckoutCart: (state, action: PayloadAction<any>) => {
+            state.apiState = getSuccess(state.apiState);
+            state.checkedoutCart = action.payload;
+        },
+        checkOut: (state, action: PayloadAction<any>) => {
+            state.apiState = getSuccess(state.apiState);
+            state.purchasedBill = action.payload;
+        },
     }
 })
 
@@ -76,6 +86,26 @@ export const getCartItems = (token: string, id: string) => async (dispatch: any)
     try {
         const response = await api().user().getCartItems(token, id);
         dispatch(actions.getCartItems(response.data));
+    } catch (error) {
+        dispatch(actions.userError(getErrorMsg(error)));
+    }
+}
+
+export const checkOut = (request: ICheckout) => async (dispatch: any) => {
+    dispatch(actions.userLoading);
+    try {
+        const response = await api().user().checkOut(request);
+        dispatch(actions.checkOut(response.data));
+    } catch (error) {
+        dispatch(actions.userError(getErrorMsg(error)));
+    }
+}
+
+export const getCheckoutCart = (token: string, id: string) => async (dispatch: any) => {
+    dispatch(actions.userLoading);
+    try {
+        const response = await api().user().getCheckoutCart(token, id);
+        dispatch(actions.getCheckoutCart(response.data));
     } catch (error) {
         dispatch(actions.userError(getErrorMsg(error)));
     }

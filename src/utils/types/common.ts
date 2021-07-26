@@ -32,13 +32,21 @@ export interface LoginRequest {
 }
 
 export interface ICart {
+    total: number,
     quantity: number,
     book: IBook,
     createdAd: string,
     id: string,
 }
 
+export interface IOrderDetails {
+    id: string,
+    cartList: ICart[],
+    isPaid: boolean,
+}
+
 export interface IUser {
+    checkoutCart: IPurchased[];
     age: number,
     role: string,
     email: string,
@@ -48,8 +56,7 @@ export interface IUser {
     lastName: string,
     locked: boolean,
     password: string,
-    username: string,
-    carts: ICart[],
+    username: string
 }
 export interface IAppUser {
     age: number,
@@ -62,6 +69,21 @@ export interface IAppUser {
     locked: boolean,
     password: string,
     username: string,
+}
+
+export interface ICheckout {
+    token: string,
+    orderId: string,
+    paymentType: string,
+    deliveryAddress: string,
+}
+
+export interface IPurchased {
+    id: string,
+    checkedOutAt: [],
+    orderDetail: IOrderDetails,
+    deliveryAddress: string,
+    paymentType: string,
 }
 
 export interface IBook {

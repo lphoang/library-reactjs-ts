@@ -13,9 +13,24 @@
   overflow: hidden;
 }
 
+.header{
+  width: 50%;
+  margin: 1.5rem auto;
+  color: white;
+  h1{
+    margin: 0.6rem;
+  }
+}
+
 /* --- PRODUCT LIST --- */
 .books {
   border-top: 1px solid #ddd;
+  h1{
+    color: white;
+    text-align: center;
+    font-size: 3rem;
+    padding: 2rem;
+  }
 }
 
 .books > li {
@@ -89,6 +104,11 @@
     padding: 1rem;
     font-size: 30px;
     font-weight: 600;
+  }
+
+  button{
+    font-size: 2rem;
+    padding: 1rem 2rem;
   }
 }
 

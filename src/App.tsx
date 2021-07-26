@@ -19,6 +19,7 @@ const Author = React.lazy(() => import(`components/Author`));
 const BooksByTitle = React.lazy(() => import(`components/Global/SearchResult`));
 const Logout = React.lazy(() => import(`components/Logout`))
 const Cart = React.lazy(() => import(`components/UserDashboard/Cart`))
+const CheckOutDetails = React.lazy(() => import(`components/UserDashboard/CheckOutDetails`))
 
 function App() {
     return (
@@ -34,6 +35,7 @@ function App() {
                         <Route exact path="/verify-email" component={VerifyEmail} />
 
                         <Route path="/user/:id" component={User}/>
+                        <Route path="/orders/:id" component={CheckOutDetails}/>
                         <Route path="/cart/:id" component={Cart}/>
                         <Route path="/books/:id" component={Book} />
                         <Route path="/genres/:id" component={Genre} />
