@@ -8,6 +8,7 @@ import Loading from 'components/Global/Loading';
 import { useHistory } from 'react-router-dom';
 import { getCheckoutCart } from 'features/slices/userSlice';
 import { Link } from 'react-router-dom';
+import formatDate from 'utils/helpers';
 
 function CheckOutDetails() {
     const { id } = useParams();
@@ -37,7 +38,7 @@ function CheckOutDetails() {
                 <div>
                     <section className="header">
                         <h1>
-                            {`Checked out at : ${(state.user.checkedoutCart.checkedOutAt).slice(0,6).join(" - ")}`}
+                            {`Checked out at : ${formatDate(state.user.checkedoutCart.checkedOutAt)}`}
                         </h1>
                         <hr />
                         <h1>

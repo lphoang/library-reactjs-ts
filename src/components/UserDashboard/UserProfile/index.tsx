@@ -6,6 +6,7 @@ import { getUserInfo } from 'features/slices/userSlice';
 import React, { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { useParams } from 'react-router-dom';
+import formatDate from 'utils/helpers';
 import './Profile.scss'
 function UserProfile() {
     const state = useAppSelector((state) => state);
@@ -63,7 +64,7 @@ function UserProfile() {
                                                 <td>{index + 1}</td>
                                                 <td>{cart.deliveryAddress}</td>
                                                 <td>{cart.paymentType}</td>
-                                                <td>{cart.checkedOutAt && cart.checkedOutAt.slice(0, 5).join(" : ")}</td>
+                                                <td>{cart.checkedOutAt && formatDate(cart.checkedOutAt)}</td>
                                                 <td>
                                                     <Link to={`/orders/${cart.id}`}>
                                                         Click here

@@ -29,6 +29,7 @@ table {
     border: 1px solid rgba($color: $background2, $alpha: 0.9);
     text-align: left;
     padding: 8px;
+    font-size: 1.25rem;
   }
   
   tr:nth-child(even) {
@@ -52,9 +53,6 @@ table {
         padding: 1rem;
         margin: 0.5rem 0;
         border-radius: 10px;
-    }
-    td{
-        text-decoration: none;
     }
 }
 

@@ -12,7 +12,7 @@ function CheckOut() {
         token: state.auth.accessToken,
         orderId: "",
         deliveryAddress: "",
-        paymentType: ""
+        paymentType: "COD"
     }
     const [show, setShow] = useState(false);
     const [checkout, setCheckout] = useState(initialValues);
@@ -37,6 +37,7 @@ function CheckOut() {
         }, 1000)
         return () => clearTimeout(timer)
     }
+    console.log(checkout)
 
 
     const showHideClassName = show ? 'modal display-block' : 'modal display-none';
@@ -65,7 +66,10 @@ function CheckOut() {
                                     <select
                                         value={checkout.paymentType}
                                         onChange={(e) =>
-                                            setCheckout({ ...checkout, paymentType: e.target.options[e.target.selectedIndex].text })}>
+                                            setCheckout({
+                                                ...checkout,
+                                                paymentType: e.target.value
+                                            })}>
                                         <option value="COD">COD</option>
                                         <option value="CARD">CARD</option>
                                     </select>
