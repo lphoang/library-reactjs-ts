@@ -15,7 +15,7 @@ const initialState = {
     user: getInitialUserInfo(),
     carts: initialCarts,
     purchasedBill: {},
-    checkedoutCart: {},
+    checkedOutCart: {},
 }
 
 const userSlice = createSlice({
@@ -42,7 +42,7 @@ const userSlice = createSlice({
         },
         getCheckoutCart: (state, action: PayloadAction<any>) => {
             state.apiState = getSuccess(state.apiState);
-            state.checkedoutCart = action.payload;
+            state.checkedOutCart = action.payload;
         },
         checkOut: (state, action: PayloadAction<any>) => {
             state.apiState = getSuccess(state.apiState);

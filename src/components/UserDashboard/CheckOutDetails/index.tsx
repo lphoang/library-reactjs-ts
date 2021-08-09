@@ -20,8 +20,8 @@ function CheckOutDetails() {
     }, [dispatch, id, state.auth.accessToken])
 
     useEffect(() => {
-        document.title = `${state.books.book.title}`
-    }, [state.books.book])
+        document.title = `Checked out items`
+    })
 
     const history = useHistory();
     useEffect(() => {
@@ -34,25 +34,25 @@ function CheckOutDetails() {
             <Navbar />
             <Category />
             {state.user.apiState.isLoading && <Loading />}
-            {state.user.checkedoutCart &&
+            {state.user.checkedOutCart &&
                 <div>
                     <section className="header">
                         <h1>
-                            {`Checked out at : ${formatDate(state.user.checkedoutCart.checkedOutAt)}`}
+                            {`Checked out at : ${formatDate(state.user.checkedOutCart.checkedOutAt)}`}
                         </h1>
                         <hr />
                         <h1>
-                            {`Delivery to : ${state.user.checkedoutCart.deliveryAddress}`}
+                            {`Delivery to : ${state.user.checkedOutCart.deliveryAddress}`}
                         </h1>
                         <hr />
                         <h1>
-                            {`Payment method : ${state.user.checkedoutCart.paymentType}`}
+                            {`Payment method : ${state.user.checkedOutCart.paymentType}`}
                         </h1>
                     </section>
                     <section className="container">
                         <ul className="books">
                             {state.user.checkedoutCart &&
-                                state.user.checkedoutCart.orderDetail.cartList.map((cart: any, index: any) => {
+                                state.user.checkedOutCart.orderDetail.cartList.map((cart: any, index: any) => {
                                     total += cart.total;
                                     return (
                                         <li className="row" key={index}>
