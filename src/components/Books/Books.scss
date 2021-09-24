@@ -17,8 +17,8 @@ section {
 .card {
   width: 100%;
   height: 100%;
-  background: $background;
-  transition: all 0.3s ease-in-out;
+  background: $background2;
+  transition: all 0.1s ease-in-out;
   &:hover,
   &:focus {
     transform: scale(1.05);
